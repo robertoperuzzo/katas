@@ -4,6 +4,8 @@
  * User: robertoperuzzo
  * Date: 2019-03-20
  * Time: 21:49
+ *
+ * https://osherove.com/tdd-kata-1
  */
 
 class StringCalculator {
