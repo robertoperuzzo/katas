@@ -68,8 +68,12 @@ class StringCalculatorTest extends TestCase {
     $sum = $this->calculator->add($input);
 
     $this->assertEquals(3, $sum);
+  }
 
-
+  public function testNegatives() {
+    $input = '32,-24,3,-1,99';
+    $this->expectExceptionMessage('negatives not allowed: -24,-1');
+    $sum = $this->calculator->add($input);
   }
 
 

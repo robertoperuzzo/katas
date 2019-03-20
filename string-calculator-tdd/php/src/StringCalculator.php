@@ -26,8 +26,17 @@ class StringCalculator {
     if ($addends_count == 1) {
       $sum = reset($addends);
     } else {
+      $negatives = [];
       foreach ($addends as $value) {
-        $sum += intval($value);
+        $integer = intval($value);
+        if ($integer < 0) {
+          $negatives[] = $integer;
+        }
+        $sum += $integer;
+      }
+
+      if (!empty($negatives)) {
+        throw new Exception('negatives not allowed: ' . implode(',', $negatives));
       }
     }
 
