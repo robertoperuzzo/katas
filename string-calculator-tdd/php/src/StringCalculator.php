@@ -2,27 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: robertoperuzzo
- * Date: 2019-03-18
- * Time: 23:08
+ * Date: 2019-03-20
+ * Time: 21:49
  */
-
-namespace Katas\Calculators;
-
 
 class StringCalculator {
 
   public function add($s) {
-    if (empty(trim($s))) {
-      return 0;
+    $sum = 0;
+
+    $matches = [];
+    preg_match('/\/\/(.)(\n)/', $s, $matches);
+
+    if (isset($matches[1])) {
+      $addends = array_map('intval', explode($matches[1], $s));
     }
     else {
-      $numbers = array_map('intval', explode(',', $s));
-      if (count($numbers) == 1) {
-        return $numbers[0];
-      }
-      elseif (count($numbers) > 2) {
-        return FALSE;
+      $addends = array_map('intval', preg_split("/[\n,]+/", $s));
+    }
+
+    $addends_count = count($addends);
+
+    if ($addends_count == 1) {
+      $sum = reset($addends);
+    } else {
+      foreach ($addends as $value) {
+        $sum += intval($value);
       }
     }
+
+    return $sum;
   }
+
 }
